@@ -9,6 +9,7 @@
     if (self) {
         self.backgroundColor = [OEPreferences drawerColor];
         self.scrollEnabled = YES;
+        self.layer.cornerRadius = 10;
 
         self.appArray = [self allAppsArray];
     }
@@ -94,7 +95,8 @@
 
 - (void)dismissView {
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.layer.cornerRadius = 10;
         CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight - 10);
         CGRect frame = CGRectMake(0, 0, 20, 20);
         self.frame = frame;

@@ -32,7 +32,8 @@
 }
 
 - (void)animateDrawerIn {
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.view.layer.cornerRadius = 0;
         CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), CGRectGetMidY([UIScreen mainScreen].bounds));
         CGRect frame = CGRectMake(0, 0, 310, 502);
         self.view.frame = frame;
