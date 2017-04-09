@@ -1,0 +1,9 @@
+Package: com.shade.oreo
+Name: Oreo
+Depends: mobilesubstrate
+Version: 0.1
+Architecture: iphoneos-arm
+Description: An elegant app drawer
+Maintainer: Shade Zepheri <ziroalpha@gmail.com>
+Author: Shade Zepheri <ziroalpha@gmail.com>
+Section: Tweaks
