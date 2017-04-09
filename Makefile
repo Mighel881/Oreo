@@ -11,4 +11,7 @@ Oreo_FILES = Tweak.x $(wildcard *.x) $(wildcard *.m)
 Oreo_FRAMEWORKS = UIKit QuartzCore
 Oreo_EXTRA_FRAMEWORKS = Cephei
 
+SUBPROJECTS = oreo
+
 include $(THEOS_MAKE_PATH)/tweak.mk
+include $(THEOS_MAKE_PATH)/aggregate.mk

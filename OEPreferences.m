@@ -18,8 +18,7 @@ static NSString *const kEnabledKey = @"enabled";
 - (instancetype)init {
     self = [super init];
   	if (self) {
-    		_preferences = [[HBPreferences alloc] initWithIdentifier:@"com.shade.oreo"];
-
+    		_preferences = [HBPreferences preferencesForIdentifier:@"com.shade.oreo"];
     		[_preferences registerBool:&_enabled default:YES forKey:kEnabledKey];
   	}
 
