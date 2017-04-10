@@ -54,6 +54,12 @@
     if (![OEPreferences sharedSettings].enabled || recognizer.state != UIGestureRecognizerStateBegan) {
         return;
     }
+    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+    CGFloat x = touchLocation.x;
+    if (x < kScreenWidth/3 || x > kScreenWidth/1.5) {
+        HBLogDebug(@"x = %f, not within bounds ", x);
+        return;
+    }
 
     [OEControlCenterDisabler setInhibited:YES];
     [self animateDrawerIn];
