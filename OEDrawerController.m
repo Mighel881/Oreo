@@ -58,7 +58,6 @@
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     CGFloat x = touchLocation.x;
     if (x < kScreenWidth / 3 || x > kScreenWidth / 1.5) {
-        HBLogDebug(@"x = %f, not within bounds ", x);
         [[objc_getClass("SBControlCenterController") sharedInstance] presentAnimated:YES completion:nil];
         return;
     }

@@ -11,7 +11,9 @@
         self.scrollEnabled = YES;
         self.layer.cornerRadius = 10;
 
-        self.appArray = [self allAppsArray];
+        NSArray *sortedBundleIdentifiers;
+        [[ALApplicationList sharedApplicationList] applicationsFilteredUsingPredicate:nil onlyVisible:YES titleSortedIdentifiers:&sortedBundleIdentifiers];
+        self.appsArray = sortedBundleIdentifiers;
 
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(noctisEnabled:) name:@"com.laughingquoll.noctis.enablenotification" object:nil];
@@ -27,22 +29,6 @@
 
 - (void)noctisDisabled:(NSNotification *)note {
     self.backgroundColor = [UIColor whiteColor];
-}
-
-- (NSMutableArray *)allAppsArray {
-    NSMutableArray *appArray = nil;
-    if ([%c(SBIconViewMap) respondsToSelector:@selector(homescreenMap)]) {
-        appArray = [[[%c(SBIconViewMap) homescreenMap].iconModel visibleIconIdentifiers] mutableCopy];
-    } else {
-        appArray = [[[[%c(SBIconController) sharedInstance] homescreenIconViewMap].iconModel visibleIconIdentifiers] mutableCopy];
-    }
-
-    [appArray sortUsingComparator:^(NSString* a, NSString* b) {
-        NSString *a_ = [[%c(SBApplicationController) sharedInstance] applicationWithBundleIdentifier:a].displayName;
-        NSString *b_ = [[%c(SBApplicationController) sharedInstance] applicationWithBundleIdentifier:b].displayName;
-        return [a_ caseInsensitiveCompare:b_];
-    }];
-    return appArray;
 }
 
 - (SBIconView *)iconViewForBundleID:(NSString*)bundleIdentifier {
@@ -78,12 +64,10 @@
     CGSize contentSize = CGSizeMake(padding, 10);
     NSInteger horizontal = 0;
 
-    for (NSString *app in self.appArray) {
+    for (NSString *app in self.appsArray) {
         @autoreleasepool {
-            HBLogDebug(@"App: %@", app);
             SBIconView *iconView = [self iconViewForBundleID:app];
             iconView.frame = CGRectMake(contentSize.width, contentSize.height, CGRectGetWidth(iconView.frame), CGRectGetHeight(iconView.frame));
-            HBLogDebug(@"iconView.frame: %@", NSStringFromCGRect(iconView.frame));
             contentSize.width += CGRectGetWidth(iconView.frame) + padding;
 
             horizontal++;

@@ -1,6 +1,6 @@
 Package: com.shade.oreo
 Name: Oreo
-Depends: mobilesubstrate
+Depends: mobilesubstrate, preferenceloader, applist, ws.hbang.common
 Version: 0.1
 Architecture: iphoneos-arm
 Description: An elegant app drawer

@@ -1,4 +1,5 @@
 #import <objc/runtime.h>
+#import <AppList/AppList.h>
 #import <QuartzCore/QuartzCore.h>
 #import <SpringBoard/SBApplication.h>
 #import <SpringBoard/SBApplicationController.h>

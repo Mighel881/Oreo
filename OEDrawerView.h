@@ -1,9 +1,8 @@
 #import <UIKit/UIKit.h>
 
 @interface OEDrawerView : UIScrollView
-@property (strong, nonatomic) NSMutableArray *appArray;
+@property (copy, nonatomic) NSArray *appsArray;
 - (instancetype)initWithFrame:(CGRect)frame;
 - (void)layoutApps;
-- (NSMutableArray *)allAppsArray;
 - (void)dismissView;
 @end
