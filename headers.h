@@ -3,6 +3,7 @@
 #import <SpringBoard/SBApplication.h>
 #import <SpringBoard/SBApplicationController.h>
 #import <SpringBoard/SBApplicationIcon.h>
+#import <SpringBoard/SBControlCenterController.h>
 #import <SpringBoard/SBIconController.h>
 #import <SpringBoard/SBIconModel.h>
 #import <SpringBoard/SBMainDisplaySystemGestureManager.h>
@@ -21,6 +22,10 @@
 @interface SBIconModel (iOS81)
 - (id)visibleIconIdentifiers;
 - (id)applicationIconForBundleIdentifier:(id)arg1;
+@end
+
+@interface SBControlCenterController ()
+- (void)presentAnimated:(BOOL)animated completion:(void(^)())completion;
 @end
 
 @interface SBIconViewMap : NSObject

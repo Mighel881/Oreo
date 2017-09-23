@@ -33,7 +33,7 @@
 
 - (void)animateDrawerIn {
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.view.layer.cornerRadius = 0;
+        self.view.layer.cornerRadius = 5;
         CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), CGRectGetMidY([UIScreen mainScreen].bounds));
         CGRect frame = CGRectMake(0, 0, 310, 502);
         self.view.frame = frame;
@@ -59,6 +59,7 @@
     CGFloat x = touchLocation.x;
     if (x < kScreenWidth / 3 || x > kScreenWidth / 1.5) {
         HBLogDebug(@"x = %f, not within bounds ", x);
+        [[objc_getClass("SBControlCenterController") sharedInstance] presentAnimated:YES completion:nil];
         return;
     }
 
