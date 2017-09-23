@@ -12,9 +12,21 @@
         self.layer.cornerRadius = 10;
 
         self.appArray = [self allAppsArray];
+
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self selector:@selector(noctisEnabled:) name:@"com.laughingquoll.noctis.enablenotification" object:nil];
+        [center addObserver:self selector:@selector(noctisDisabled:) name:@"com.laughingquoll.noctis.disablenotification" object:nil];
     }
 
     return self;
+}
+
+- (void)noctisEnabled:(NSNotification *)note {
+    self.backgroundColor = [UIColor blackColor];
+}
+
+- (void)noctisDisabled:(NSNotification *)note {
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSMutableArray *)allAppsArray {
@@ -51,46 +63,45 @@
 }
 
 - (void)layoutApps {
-    HBLogDebug(@"started layoutApps");
     CGSize fullSize = [%c(SBIconView) defaultIconSize];
     fullSize.height = fullSize.width;
     CGFloat padding = 20;
 
     NSInteger numIconsPerLine = 0;
     CGFloat tmpWidth = 10;
-    while (tmpWidth + fullSize.width <= self.frame.size.width) {
+    while (tmpWidth + fullSize.width <= CGRectGetWidth(self.frame)) {
         numIconsPerLine++;
         tmpWidth += fullSize.width + 20;
     }
-    padding = (self.frame.size.width - (numIconsPerLine * fullSize.width)) / (numIconsPerLine + 1);
+    padding = (CGRectGetWidth(self.frame) - (numIconsPerLine * fullSize.width)) / (numIconsPerLine + 1);
 
     CGSize contentSize = CGSizeMake(padding, 10);
     NSInteger horizontal = 0;
 
-    for (NSString *str in self.appArray) {
+    for (NSString *app in self.appArray) {
         @autoreleasepool {
-            SBIconView *iconView = [self iconViewForBundleID:str];
-            iconView.frame = CGRectMake(contentSize.width, contentSize.height, iconView.frame.size.width, iconView.frame.size.height);
-            contentSize.width += iconView.frame.size.width + padding;
+            HBLogDebug(@"App: %@", app);
+            SBIconView *iconView = [self iconViewForBundleID:app];
+            iconView.frame = CGRectMake(contentSize.width, contentSize.height, CGRectGetWidth(iconView.frame), CGRectGetHeight(iconView.frame));
+            HBLogDebug(@"iconView.frame: %@", NSStringFromCGRect(iconView.frame));
+            contentSize.width += CGRectGetWidth(iconView.frame) + padding;
 
             horizontal++;
             if (horizontal >= numIconsPerLine) {
                 horizontal = 0;
                 contentSize.width = padding;
-                contentSize.height += iconView.frame.size.height + 10;
+                contentSize.height += CGRectGetWidth(iconView.frame) + 10;
             }
 
-            iconView.restorationIdentifier = str;
+            iconView.restorationIdentifier = app;
             UITapGestureRecognizer *iconViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appViewItemTap:)];
             [iconView addGestureRecognizer:iconViewTapGestureRecognizer];
             [self addSubview:iconView];
-            HBLogDebug(@"addSubview");
         }
     }
     contentSize.width = self.frame.size.width;
     contentSize.height += fullSize.height * 1.5;
     self.contentSize = contentSize;
-    HBLogDebug(@"ended layoutApps");
 }
 
 - (void)dismissView {
