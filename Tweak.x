@@ -1,16 +1,6 @@
 #import "OEDrawerController.h"
+#import "OEPreferences.h"
 #import "headers.h"
-
-%hook SpringBoard
-- (void)applicationDidFinishLaunching:(id)application {
-    %orig;
-
-    [[OEDrawerController sharedInstance] view];
-    UIScreenEdgePanGestureRecognizer *screenEdgePan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:[OEDrawerController sharedInstance] action:@selector(gestureStateChanged:)];
-    screenEdgePan.edges = UIRectEdgeBottom;
-    [[%c(FBSystemGestureManager) sharedInstance] addGestureRecognizer:screenEdgePan toDisplay:[%c(FBDisplayManager) mainDisplay]];
-}
-%end
 
 %hook SBUIController
 - (BOOL)handleHomeButtonSinglePressUp {
@@ -18,3 +8,15 @@
     return %orig;
 }
 %end
+
+static inline void initializeTweak(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    [[OEDrawerController sharedInstance] view];
+    SBScreenEdgePanGestureRecognizer *recognizer = [[%c(SBScreenEdgePanGestureRecognizer) alloc] initWithTarget:[OEDrawerController sharedInstance] action:@selector(gestureStateChanged:) type:SBSystemGestureTypeShowControlCenter];
+    recognizer.edges = UIRectEdgeBottom;
+    [[%c(SBSystemGestureManager) mainDisplayManager] addGestureRecognizer:recognizer withType:52];
+}
+
+%ctor {
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, &initializeTweak, CFSTR("SBSpringBoardDidLaunchNotification"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+    [OEPreferences sharedSettings];
+}

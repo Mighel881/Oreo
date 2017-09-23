@@ -6,19 +6,11 @@
 #import <SpringBoard/SBIconController.h>
 #import <SpringBoard/SBApplicationIcon.h>
 #import <SpringBoard/SBApplication.h>
+#import <SpringBoard/SBMainDisplaySystemGestureManager.h>
 
 #define kScreenWidth CGRectGetMaxX([UIScreen mainScreen].bounds)
 #define kScreenHeight CGRectGetMaxY([UIScreen mainScreen].bounds)
 
-@interface FBSystemGestureManager : NSObject <UIGestureRecognizerDelegate>
-+ (id)sharedInstance;
-- (void)addGestureRecognizer:(id)arg1 toDisplay:(id)arg2;
-@end
-
-@interface FBDisplayManager : NSObject
-+ (id)sharedInstance;
-+ (id)mainDisplay;
-@end
 
 @interface UIApplication ()
 - (BOOL)launchApplicationWithIdentifier:(id)identifier suspended:(BOOL)suspended;
