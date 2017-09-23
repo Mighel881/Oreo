@@ -7,6 +7,7 @@
 #import <SpringBoard/SBApplicationIcon.h>
 #import <SpringBoard/SBApplication.h>
 #import <SpringBoard/SBMainDisplaySystemGestureManager.h>
+#import <SpringBoard/SBScreenEdgePanGestureRecognizer.h>
 
 #define kScreenWidth CGRectGetMaxX([UIScreen mainScreen].bounds)
 #define kScreenHeight CGRectGetMaxY([UIScreen mainScreen].bounds)

@@ -1,23 +1,32 @@
 #import "OEControlCenterDisabler.h"
-#import <UIKit/UIKit.h>
+#import "headers.h"
 
-BOOL inhbited = NO;
+static BOOL inhibited = NO;
 
 @implementation OEControlCenterDisabler : NSObject
 + (void)setInhibited:(BOOL)value {
-    inhbited = value;
+    inhibited = value;
 }
 
 + (BOOL)isInhibited {
-    return inhbited;
+    return inhibited;
 }
 @end
 
 %hook SBControlCenterController
-- (void)presentAnimated:(BOOL)arg1 completion:(id)arg2 {
-  	if (inhbited) {
-  		  return;
-  	}
-  	%orig;
+- (void)beginPresentationWithTouchLocation:(CGPoint)location presentationBegunHandler:(void(^)())handler {
+    if (inhibited) {
+        return;
+    }
+
+    %orig;
+}
+
+- (void)_showControlCenterGestureBeganWithGestureRecognizer:(SBScreenEdgePanGestureRecognizer *)recognizer {
+    if (inhibited) {
+        return;
+    }
+
+    %orig;
 }
 %end
