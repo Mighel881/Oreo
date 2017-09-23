@@ -35,7 +35,7 @@
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.layer.cornerRadius = 5;
         CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), CGRectGetMidY([UIScreen mainScreen].bounds));
-        CGRect frame = CGRectMake(0, 0, 310, 502);
+        CGRect frame = CGRectMake(0, 0, 355, 574);
         self.view.frame = frame;
         self.view.center = center;
     } completion:^(BOOL complete) {
