@@ -7,5 +7,5 @@
 }
 @property (readonly, nonatomic) BOOL enabled;
 + (instancetype)sharedSettings;
-+ (UIColor*)drawerColor;
++ (UIColor *)drawerColor;
 @end

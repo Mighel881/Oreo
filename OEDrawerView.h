@@ -4,6 +4,6 @@
 @property (strong, nonatomic) NSMutableArray *appArray;
 - (instancetype)initWithFrame:(CGRect)frame;
 - (void)layoutApps;
-- (NSMutableArray*)allAppsArray;
+- (NSMutableArray *)allAppsArray;
 - (void)dismissView;
 @end

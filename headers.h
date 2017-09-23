@@ -1,29 +1,18 @@
 #import <objc/runtime.h>
-#import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import <SpringBoard/SpringBoard.h>
-#import <SpringBoard/SBIconModel.h>
-#import <SpringBoard/SBIconController.h>
-#import <SpringBoard/SBApplicationIcon.h>
 #import <SpringBoard/SBApplication.h>
+#import <SpringBoard/SBApplicationController.h>
+#import <SpringBoard/SBApplicationIcon.h>
+#import <SpringBoard/SBIconController.h>
+#import <SpringBoard/SBIconModel.h>
 #import <SpringBoard/SBMainDisplaySystemGestureManager.h>
 #import <SpringBoard/SBScreenEdgePanGestureRecognizer.h>
+#import <SpringBoard/SBUIController.h>
+#import <SpringBoard/SpringBoard.h>
+#import <UIKit/UIKit.h>
 
 #define kScreenWidth CGRectGetMaxX([UIScreen mainScreen].bounds)
 #define kScreenHeight CGRectGetMaxY([UIScreen mainScreen].bounds)
-
-
-@interface UIApplication ()
-- (BOOL)launchApplicationWithIdentifier:(id)identifier suspended:(BOOL)suspended;
-@end
-
-@interface SBHomeScreenWindow : UIWindow
-@end
-
-@interface SBUIController : NSObject
-+ (id)sharedInstance;
-- (id)window;
-@end
 
 @interface SBIconView : UIView
 + (CGSize)defaultIconSize;
@@ -45,11 +34,11 @@
 
 @interface SBIconController (iOS90)
 @property (nonatomic,readonly) SBIconViewMap *homescreenIconViewMap;
-+ (id)sharedInstance;
 @end
 
-@interface SBApplicationController : NSObject
-+ (id)sharedInstance;
-- (SBApplication*)applicationWithBundleIdentifier:(NSString*)identifier;
-- (SBApplication*)applicationWithPid:(int)arg1;
+@interface UIImage (Private)
++ (instancetype)_applicationIconImageForBundleIdentifier:(NSString *)identifier format:(NSInteger)format;
++ (instancetype)_applicationIconImageForBundleIdentifier:(NSString *)identifier format:(NSInteger)format scale:(CGFloat)scale;
++ (instancetype)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;
+- (instancetype)_applicationIconImageForFormat:(NSInteger)format precomposed:(BOOL)precomposed;
 @end

@@ -17,7 +17,7 @@
     return self;
 }
 
-- (NSMutableArray*)allAppsArray {
+- (NSMutableArray *)allAppsArray {
     NSMutableArray *appArray = nil;
     if ([%c(SBIconViewMap) respondsToSelector:@selector(homescreenMap)]) {
         appArray = [[[[%c(SBIconViewMap) homescreenMap] iconModel] visibleIconIdentifiers] mutableCopy];
@@ -33,7 +33,7 @@
     return appArray;
 }
 
-- (SBIconView*)iconViewForBundleID:(NSString*)bundleIdentifier {
+- (SBIconView *)iconViewForBundleID:(NSString*)bundleIdentifier {
     SBApplicationIcon *icon = nil;
     SBIconView *iconView = nil;
     if ([%c(SBIconViewMap) respondsToSelector:@selector(homescreenMap)]) {
@@ -43,7 +43,7 @@
         icon = [[[[%c(SBIconController) sharedInstance] homescreenIconViewMap] iconModel] applicationIconForBundleIdentifier:bundleIdentifier];
         iconView = [[[%c(SBIconController) sharedInstance] homescreenIconViewMap] _iconViewForIcon:icon];
     }
-    if (!iconView || ![icon isKindOfClass:[%c(SBApplicationIcon) class]]) {
+    if (!iconView || ![icon isKindOfClass:%c(SBApplicationIcon)]) {
         return nil;
     }
 
@@ -104,9 +104,9 @@
     } completion:nil];
 }
 
-- (void)appViewItemTap:(UITapGestureRecognizer*)recognizer {
+- (void)appViewItemTap:(UITapGestureRecognizer *)recognizer {
     [self dismissView];
-    [[UIApplication sharedApplication] launchApplicationWithIdentifier:recognizer.view.restorationIdentifier suspended:NO];
+    [(SpringBoard *)[UIApplication sharedApplication] launchApplicationWithIdentifier:recognizer.view.restorationIdentifier suspended:NO];
 }
 
 @end

@@ -27,7 +27,7 @@
 - (void)setupDrawer {
     self.view.center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight - 10);
 
-    SBHomeScreenWindow *homescreenWindow = [[objc_getClass("SBUIController") sharedInstance] window];
+    UIWindow *homescreenWindow = [[objc_getClass("SBUIController") sharedInstance] window];
     [homescreenWindow addSubview:self.view];
 }
 
@@ -40,7 +40,7 @@
         self.view.center = center;
     } completion:^(BOOL complete) {
         if (complete) {
-          [(OEDrawerView*)self.view layoutApps];
+          [(OEDrawerView *)self.view layoutApps];
           [OEControlCenterDisabler setInhibited:NO];
         }
     }];
@@ -54,9 +54,10 @@
     if (![OEPreferences sharedSettings].enabled || recognizer.state != UIGestureRecognizerStateBegan) {
         return;
     }
+
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     CGFloat x = touchLocation.x;
-    if (x < kScreenWidth/3 || x > kScreenWidth/1.5) {
+    if (x < kScreenWidth / 3 || x > kScreenWidth / 1.5) {
         HBLogDebug(@"x = %f, not within bounds ", x);
         return;
     }
