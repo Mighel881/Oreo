@@ -25,7 +25,7 @@
 }
 
 - (void)setupDrawer {
-    self.view.center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight - 10);
+    self.view.center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight);
 
     UIWindow *homescreenWindow = [[objc_getClass("SBUIController") sharedInstance] window];
     [homescreenWindow addSubview:self.view];

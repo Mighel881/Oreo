@@ -11,8 +11,7 @@
 
   	CGRect frame = CGRectMake(0, 0, self.table.bounds.size.width, 127);
 
-  	UIImage *headerImage = [[UIImage alloc]
-  		initWithContentsOfFile:[[NSBundle bundleWithPath:@"/Library/PreferenceBundles/oreo.bundle"] pathForResource:@"OreoHeader" ofType:@"png"]];
+  	UIImage *headerImage = [[UIImage alloc] initWithContentsOfFile:[[NSBundle bundleWithPath:@"/Library/PreferenceBundles/oreo.bundle"] pathForResource:@"OreoHeader" ofType:@"png"]];
 
   	UIImageView *headerView = [[UIImageView alloc] initWithFrame:frame];
   	headerView.image = headerImage;

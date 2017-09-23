@@ -20,8 +20,8 @@
 @end
 
 @interface SBIconModel (iOS81)
-- (id)visibleIconIdentifiers;
-- (id)applicationIconForBundleIdentifier:(id)arg1;
+- (NSArray *)visibleIconIdentifiers;
+- (SBApplicationIcon *)applicationIconForBundleIdentifier:(NSString *)identifier;
 @end
 
 @interface SBControlCenterController ()

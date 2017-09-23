@@ -20,9 +20,9 @@
 - (NSMutableArray *)allAppsArray {
     NSMutableArray *appArray = nil;
     if ([%c(SBIconViewMap) respondsToSelector:@selector(homescreenMap)]) {
-        appArray = [[[[%c(SBIconViewMap) homescreenMap] iconModel] visibleIconIdentifiers] mutableCopy];
+        appArray = [[[%c(SBIconViewMap) homescreenMap].iconModel visibleIconIdentifiers] mutableCopy];
     } else {
-        appArray = [[[[[%c(SBIconController) sharedInstance] homescreenIconViewMap] iconModel] visibleIconIdentifiers] mutableCopy];
+        appArray = [[[[%c(SBIconController) sharedInstance] homescreenIconViewMap].iconModel visibleIconIdentifiers] mutableCopy];
     }
 
     [appArray sortUsingComparator:^(NSString* a, NSString* b) {
@@ -37,10 +37,10 @@
     SBApplicationIcon *icon = nil;
     SBIconView *iconView = nil;
     if ([%c(SBIconViewMap) respondsToSelector:@selector(homescreenMap)]) {
-        icon = [[[%c(SBIconViewMap) homescreenMap] iconModel] applicationIconForBundleIdentifier:bundleIdentifier];
+        icon = [[%c(SBIconViewMap) homescreenMap].iconModel applicationIconForBundleIdentifier:bundleIdentifier];
         iconView = [[%c(SBIconViewMap) homescreenMap] _iconViewForIcon:icon];
     } else {
-        icon = [[[[%c(SBIconController) sharedInstance] homescreenIconViewMap] iconModel] applicationIconForBundleIdentifier:bundleIdentifier];
+        icon = [[[%c(SBIconController) sharedInstance] homescreenIconViewMap].iconModel applicationIconForBundleIdentifier:bundleIdentifier];
         iconView = [[[%c(SBIconController) sharedInstance] homescreenIconViewMap] _iconViewForIcon:icon];
     }
     if (!iconView || ![icon isKindOfClass:%c(SBApplicationIcon)]) {
@@ -97,7 +97,7 @@
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.layer.cornerRadius = 10;
-        CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight - 10);
+        CGPoint center = CGPointMake(CGRectGetMidX([UIScreen mainScreen].bounds), kScreenHeight);
         CGRect frame = CGRectMake(0, 0, 20, 20);
         self.frame = frame;
         self.center = center;
