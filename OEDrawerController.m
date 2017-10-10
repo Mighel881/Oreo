@@ -47,7 +47,7 @@
 }
 
 - (void)dismissView {
-    [(OEDrawerView*)self.view dismissView];
+    [(OEDrawerView *)self.view dismissView];
 }
 
 - (void)gestureStateChanged:(UIGestureRecognizer*)recognizer {

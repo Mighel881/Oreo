@@ -1,6 +1,6 @@
-#import <Preferences/PSListController.h>
-#import <CepheiPrefs/HBRootListController.h>
+#import <CepheiPrefs/HBAboutListController.h>
+#import <UIKit/UIImage+Private.h>
 
-@interface ORERootListController : HBRootListController
+@interface ORERootListController : HBAboutListController
 
 @end
